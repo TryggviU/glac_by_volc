@@ -1,0 +1,167 @@
+data
++---GVP
++---RGI
+    +---global_files
+    ¦   +---attributes
+    ¦   +---RGI2000-v7.0-C-global
+    ¦   ¦   +---RGI2000-v7.0-C-01_alaska
+    ¦   ¦   +---RGI2000-v7.0-C-02_western_canada_usa
+    ¦   ¦   +---RGI2000-v7.0-C-03_arctic_canada_north
+    ¦   ¦   +---RGI2000-v7.0-C-04_arctic_canada_south
+    ¦   ¦   +---RGI2000-v7.0-C-05_greenland_periphery
+    ¦   ¦   +---RGI2000-v7.0-C-06_iceland
+    ¦   ¦   +---RGI2000-v7.0-C-07_svalbard_jan_mayen
+    ¦   ¦   +---RGI2000-v7.0-C-08_scandinavia
+    ¦   ¦   +---RGI2000-v7.0-C-09_russian_arctic
+    ¦   ¦   +---RGI2000-v7.0-C-10_north_asia
+    ¦   ¦   +---RGI2000-v7.0-C-11_central_europe
+    ¦   ¦   +---RGI2000-v7.0-C-12_caucasus_middle_east
+    ¦   ¦   +---RGI2000-v7.0-C-13_central_asia
+    ¦   ¦   +---RGI2000-v7.0-C-14_south_asia_west
+    ¦   ¦   +---RGI2000-v7.0-C-15_south_asia_east
+    ¦   ¦   +---RGI2000-v7.0-C-16_low_latitudes
+    ¦   ¦   +---RGI2000-v7.0-C-17_southern_andes
+    ¦   ¦   +---RGI2000-v7.0-C-18_new_zealand
+    ¦   ¦   +---RGI2000-v7.0-C-19_subantarctic_antarctic_islands
+    ¦   +---RGI2000-v7.0-G-global
+    ¦   ¦   +---RGI2000-v7.0-G-01_alaska
+    ¦   ¦   +---RGI2000-v7.0-G-02_western_canada_usa
+    ¦   ¦   +---RGI2000-v7.0-G-03_arctic_canada_north
+    ¦   ¦   +---RGI2000-v7.0-G-04_arctic_canada_south
+    ¦   ¦   +---RGI2000-v7.0-G-05_greenland_periphery
+    ¦   ¦   +---RGI2000-v7.0-G-06_iceland
+    ¦   ¦   +---RGI2000-v7.0-G-07_svalbard_jan_mayen
+    ¦   ¦   +---RGI2000-v7.0-G-08_scandinavia
+    ¦   ¦   +---RGI2000-v7.0-G-09_russian_arctic
+    ¦   ¦   +---RGI2000-v7.0-G-10_north_asia
+    ¦   ¦   +---RGI2000-v7.0-G-11_central_europe
+    ¦   ¦   +---RGI2000-v7.0-G-12_caucasus_middle_east
+    ¦   ¦   +---RGI2000-v7.0-G-13_central_asia
+    ¦   ¦   +---RGI2000-v7.0-G-14_south_asia_west
+    ¦   ¦   +---RGI2000-v7.0-G-15_south_asia_east
+    ¦   ¦   +---RGI2000-v7.0-G-16_low_latitudes
+    ¦   ¦   +---RGI2000-v7.0-G-17_southern_andes
+    ¦   ¦   +---RGI2000-v7.0-G-18_new_zealand
+    ¦   ¦   +---RGI2000-v7.0-G-19_subantarctic_antarctic_islands
+    ¦   +---RGI2000-v7.0-I-global
+    ¦   ¦   +---RGI2000-v7.0-I-01_alaska
+    ¦   ¦   +---RGI2000-v7.0-I-02_western_canada_usa
+    ¦   ¦   +---RGI2000-v7.0-I-03_arctic_canada_north
+    ¦   ¦   +---RGI2000-v7.0-I-04_arctic_canada_south
+    ¦   ¦   +---RGI2000-v7.0-I-05_greenland_periphery
+    ¦   ¦   +---RGI2000-v7.0-I-06_iceland
+    ¦   ¦   +---RGI2000-v7.0-I-07_svalbard_jan_mayen
+    ¦   ¦   +---RGI2000-v7.0-I-08_scandinavia
+    ¦   ¦   +---RGI2000-v7.0-I-09_russian_arctic
+    ¦   ¦   +---RGI2000-v7.0-I-10_north_asia
+    ¦   ¦   +---RGI2000-v7.0-I-11_central_europe
+    ¦   ¦   +---RGI2000-v7.0-I-12_caucasus_middle_east
+    ¦   ¦   +---RGI2000-v7.0-I-13_central_asia
+    ¦   ¦   +---RGI2000-v7.0-I-14_south_asia_west
+    ¦   ¦   +---RGI2000-v7.0-I-15_south_asia_east
+    ¦   ¦   +---RGI2000-v7.0-I-16_low_latitudes
+    ¦   ¦   +---RGI2000-v7.0-I-17_southern_andes
+    ¦   ¦   +---RGI2000-v7.0-I-18_new_zealand
+    ¦   ¦   +---RGI2000-v7.0-I-19_subantarctic_antarctic_islands
+    ¦   +---RGI2000-v7.0-L-global
+    ¦       +---RGI2000-v7.0-L-01_alaska
+    ¦       +---RGI2000-v7.0-L-02_western_canada_usa
+    ¦       +---RGI2000-v7.0-L-03_arctic_canada_north
+    ¦       +---RGI2000-v7.0-L-04_arctic_canada_south
+    ¦       +---RGI2000-v7.0-L-05_greenland_periphery
+    ¦       +---RGI2000-v7.0-L-06_iceland
+    ¦       +---RGI2000-v7.0-L-07_svalbard_jan_mayen
+    ¦       +---RGI2000-v7.0-L-08_scandinavia
+    ¦       +---RGI2000-v7.0-L-09_russian_arctic
+    ¦       +---RGI2000-v7.0-L-10_north_asia
+    ¦       +---RGI2000-v7.0-L-11_central_europe
+    ¦       +---RGI2000-v7.0-L-12_caucasus_middle_east
+    ¦       +---RGI2000-v7.0-L-13_central_asia
+    ¦       +---RGI2000-v7.0-L-14_south_asia_west
+    ¦       +---RGI2000-v7.0-L-15_south_asia_east
+    ¦       +---RGI2000-v7.0-L-16_low_latitudes
+    ¦       +---RGI2000-v7.0-L-17_southern_andes
+    ¦       +---RGI2000-v7.0-L-18_new_zealand
+    ¦       +---RGI2000-v7.0-L-19_subantarctic_antarctic_islands
+    +---regional_files
+    ¦   +---RGI2000-v7.0-C
+    ¦   ¦   +---RGI2000-v7.0-C-01_alaska
+    ¦   ¦   +---RGI2000-v7.0-C-02_western_canada_usa
+    ¦   ¦   +---RGI2000-v7.0-C-03_arctic_canada_north
+    ¦   ¦   +---RGI2000-v7.0-C-04_arctic_canada_south
+    ¦   ¦   +---RGI2000-v7.0-C-05_greenland_periphery
+    ¦   ¦   +---RGI2000-v7.0-C-06_iceland
+    ¦   ¦   +---RGI2000-v7.0-C-07_svalbard_jan_mayen
+    ¦   ¦   +---RGI2000-v7.0-C-08_scandinavia
+    ¦   ¦   +---RGI2000-v7.0-C-09_russian_arctic
+    ¦   ¦   +---RGI2000-v7.0-C-10_north_asia
+    ¦   ¦   +---RGI2000-v7.0-C-11_central_europe
+    ¦   ¦   +---RGI2000-v7.0-C-12_caucasus_middle_east
+    ¦   ¦   +---RGI2000-v7.0-C-13_central_asia
+    ¦   ¦   +---RGI2000-v7.0-C-14_south_asia_west
+    ¦   ¦   +---RGI2000-v7.0-C-15_south_asia_east
+    ¦   ¦   +---RGI2000-v7.0-C-16_low_latitudes
+    ¦   ¦   +---RGI2000-v7.0-C-17_southern_andes
+    ¦   ¦   +---RGI2000-v7.0-C-18_new_zealand
+    ¦   ¦   +---RGI2000-v7.0-C-19_subantarctic_antarctic_islands
+    ¦   +---RGI2000-v7.0-G
+    ¦   ¦   +---RGI2000-v7.0-G-01_alaska
+    ¦   ¦   +---RGI2000-v7.0-G-02_western_canada_usa
+    ¦   ¦   +---RGI2000-v7.0-G-03_arctic_canada_north
+    ¦   ¦   +---RGI2000-v7.0-G-04_arctic_canada_south
+    ¦   ¦   +---RGI2000-v7.0-G-05_greenland_periphery
+    ¦   ¦   +---RGI2000-v7.0-G-06_iceland
+    ¦   ¦   +---RGI2000-v7.0-G-07_svalbard_jan_mayen
+    ¦   ¦   +---RGI2000-v7.0-G-08_scandinavia
+    ¦   ¦   +---RGI2000-v7.0-G-09_russian_arctic
+    ¦   ¦   +---RGI2000-v7.0-G-10_north_asia
+    ¦   ¦   +---RGI2000-v7.0-G-11_central_europe
+    ¦   ¦   +---RGI2000-v7.0-G-12_caucasus_middle_east
+    ¦   ¦   +---RGI2000-v7.0-G-13_central_asia
+    ¦   ¦   +---RGI2000-v7.0-G-14_south_asia_west
+    ¦   ¦   +---RGI2000-v7.0-G-15_south_asia_east
+    ¦   ¦   +---RGI2000-v7.0-G-16_low_latitudes
+    ¦   ¦   +---RGI2000-v7.0-G-17_southern_andes
+    ¦   ¦   +---RGI2000-v7.0-G-18_new_zealand
+    ¦   ¦   +---RGI2000-v7.0-G-19_subantarctic_antarctic_islands
+    ¦   +---RGI2000-v7.0-I
+    ¦   ¦   +---RGI2000-v7.0-I-01_alaska
+    ¦   ¦   +---RGI2000-v7.0-I-02_western_canada_usa
+    ¦   ¦   +---RGI2000-v7.0-I-03_arctic_canada_north
+    ¦   ¦   +---RGI2000-v7.0-I-04_arctic_canada_south
+    ¦   ¦   +---RGI2000-v7.0-I-05_greenland_periphery
+    ¦   ¦   +---RGI2000-v7.0-I-06_iceland
+    ¦   ¦   +---RGI2000-v7.0-I-07_svalbard_jan_mayen
+    ¦   ¦   +---RGI2000-v7.0-I-08_scandinavia
+    ¦   ¦   +---RGI2000-v7.0-I-09_russian_arctic
+    ¦   ¦   +---RGI2000-v7.0-I-10_north_asia
+    ¦   ¦   +---RGI2000-v7.0-I-11_central_europe
+    ¦   ¦   +---RGI2000-v7.0-I-12_caucasus_middle_east
+    ¦   ¦   +---RGI2000-v7.0-I-13_central_asia
+    ¦   ¦   +---RGI2000-v7.0-I-14_south_asia_west
+    ¦   ¦   +---RGI2000-v7.0-I-15_south_asia_east
+    ¦   ¦   +---RGI2000-v7.0-I-16_low_latitudes
+    ¦   ¦   +---RGI2000-v7.0-I-17_southern_andes
+    ¦   ¦   +---RGI2000-v7.0-I-18_new_zealand
+    ¦   ¦   +---RGI2000-v7.0-I-19_subantarctic_antarctic_islands
+    ¦   +---RGI2000-v7.0-L
+    ¦       +---RGI2000-v7.0-L-01_alaska
+    ¦       +---RGI2000-v7.0-L-02_western_canada_usa
+    ¦       +---RGI2000-v7.0-L-03_arctic_canada_north
+    ¦       +---RGI2000-v7.0-L-04_arctic_canada_south
+    ¦       +---RGI2000-v7.0-L-05_greenland_periphery
+    ¦       +---RGI2000-v7.0-L-06_iceland
+    ¦       +---RGI2000-v7.0-L-07_svalbard_jan_mayen
+    ¦       +---RGI2000-v7.0-L-08_scandinavia
+    ¦       +---RGI2000-v7.0-L-09_russian_arctic
+    ¦       +---RGI2000-v7.0-L-10_north_asia
+    ¦       +---RGI2000-v7.0-L-11_central_europe
+    ¦       +---RGI2000-v7.0-L-12_caucasus_middle_east
+    ¦       +---RGI2000-v7.0-L-13_central_asia
+    ¦       +---RGI2000-v7.0-L-14_south_asia_west
+    ¦       +---RGI2000-v7.0-L-15_south_asia_east
+    ¦       +---RGI2000-v7.0-L-16_low_latitudes
+    ¦       +---RGI2000-v7.0-L-17_southern_andes
+    ¦       +---RGI2000-v7.0-L-18_new_zealand
+    ¦       +---RGI2000-v7.0-L-19_subantarctic_antarctic_islands
+    +---RGI2000-v7.0-regions

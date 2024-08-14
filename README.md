@@ -6,7 +6,7 @@ Repository for code\* used to locate glaciers within a radial distance from volc
 
 
 
-## Abstract
+## Volcanic controls on glacier elevation - Abstract
 
 Glaciated volcanoes pose heightened risk to societies compared to their ice-free counterparts. Monitoring of glaciovolcanic processes is therefore of vital importance, as traditional surveys of volcanic activity may be hindered by glacier cover and/or remoteness. Volcanic activity has the potential of asserting controls on the dynamics and mass balance of nearby glaciers. Previous studies have shown that overlying glaciers of some volcanoes are bound to higher elevations than other neighbouring glaciers. Here we analyse global datasets of volcanoes and glacier geometries to delineate local trends in glacier elevation, and  assess the effect of volcanism. Additionally, we utilise multispectral and synthetic aperture radar images from the Sentinel satellites to automatically track glacier elevation changes. We demonstrate that, globally, volcanoes modulate the elevation of overlying glaciers, irrespective of local topography and climate. We further present some initial results from our automated annual tracking of glacier elevations, showing diverging trends between glaciers proximal and distal to volcanoes.
 
@@ -14,7 +14,7 @@ Glaciated volcanoes pose heightened risk to societies compared to their ice-free
 
 ## Methods
 
-### Locate glaciers by volcanoes
+### Locating glaciers by volcanoes
 
 We locate glaciers within the vicinity of volcanoes by comparing two databases: The ``Volcanoes of the World'' of the [Smithsonian Global Volcanism Program (GVP)](https://volcano.si.edu/volcanolist_holocene.cfm) -- a complete list of Earth's Holocene volcanoes; and the [Randolph Glacier Inventory (RGI) version 7.0](http://www.glims.org/rgi_user_guide/welcome.html) -- a dataset containing outlines and information for all glaciers in the World, excluding the ice sheets of Greenland and Antarctica, in the year 2000. We locate all RGI glacier geometries within a radial search area around each GVP volcano with Python scripts utilising the geospatial data package [GeoPandas](https://geopandas.org/). The code effectively accomplishes the same as that of [Edwards et al. (2020)](https://doi.org/10.1016/j.gloplacha.2020.103356) who used a search radius of 5 km, but does so automatically and allows the user to specify the search radius. Besides downloading this repository and the data (see [Data](#data)), the code is fully automated, with optional user inputs.
 

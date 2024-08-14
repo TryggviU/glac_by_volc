@@ -20,11 +20,11 @@ $$\Delta \bar{z}\_{\rm ELA} = \bar{z}\_{\rm ELA}^{\rm volcanic} - \bar{z}\_{\rm 
 
 We adopt the methodology of [Howcutt et al. (2023)](https://doi.org/10.1130/G51411.1), but adapt it to use the median glacier elevations, $\tilde{z}$, instead of ELAs. We compute the relative median elevation for each ($i$-th) individual glacier in a given region
 
-$$\Delta \tilde{z}\_{i} = \tilde{z}\_{i} - \bar{\tilde{{z}}},$$
+$$\Delta \tilde{z}\_{i} = \tilde{z}\_{i} - \overline{\tilde{{z}}},$$
 
 where 
 
-$$\bar{\tilde{z}} = \frac{1}{n} \sum_{i=1}^{n} \tilde{z}\_i$$
+$$\overline{\tilde{z}} = \frac{1}{n} \sum_{i=1}^{n} \tilde{z}\_i$$
 
 is the average median glacier elevation within the region, comprising of $n$ glaciers.
 

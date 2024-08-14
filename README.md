@@ -6,6 +6,12 @@ Repository for code\* used to locate glaciers within a radial distance from volc
 
 
 
+## Abstract
+
+Glaciated volcanoes pose heightened risk to societies compared to their ice-free counterparts. Monitoring of glaciovolcanic processes is therefore of vital importance, as traditional surveys of volcanic activity may be hindered by glacier cover and/or remoteness. Volcanic activity has the potential of asserting controls on the dynamics and mass balance of nearby glaciers. Previous studies have shown that overlying glaciers of some volcanoes are bound to higher elevations than other neighbouring glaciers. Here we analyse global datasets of volcanoes and glacier geometries to delineate local trends in glacier elevation, and  assess the effect of volcanism. Additionally, we utilise multispectral and synthetic aperture radar images from the Sentinel satellites to automatically track glacier elevation changes. We demonstrate that, globally, volcanoes modulate the elevation of overlying glaciers, irrespective of local topography and climate. We further present some initial results from our automated annual tracking of glacier elevations, showing diverging trends between glaciers proximal and distal to volcanoes.
+
+
+
 ## Methods
 
 ### Locate glaciers by volcanoes

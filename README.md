@@ -58,16 +58,3 @@ and stored the data within their respective subdirectories, [data/RGI](./data/RG
 The code uses the facilities made available by 
  - [Alaska Satellite Facility (ASF)](https://asf.alaska.edu/): to produce InSAR products from Sentinel 1 scenes of an area of interest.
  - [Google Earth Engine (GEE)](https://earthengine.google.com/): to produce cloud free mosaics from Sentinel 2 scenes of an area of interest.
-
-
-
-## Hardware
-
-All the code presented in this repository was developed and executed on a relatively basic labtop with the following specs:
- - System Model:	HP ZBook Power 15.6 inch G9 Mobile Workstation PC
- - OS: Windows 10 Enterprise
- - Processor:	12th Gen Intel(R) Core(TM) i7-12800H, 2400 Mhz, 14 Core(s), 20 Logical Processor(s)
- - Memory: 32 GB
- - Storage: 500 GB. ATH!: This is only enough for complete satellite analysis of a few volcanoes (spanning 2015-2023), as the compressed data for a single volcano can be of up to ~20 GB per year.
-
-The code was developed on a Windows machine, but should work for other operating systems (Linux/macOS) as well. The [tool scripts](./tools) used for directory/data organization and preparation were written in `PowerShell`, which may require the installation of appropriate terminals on Linux/macOS machines. If that is not feasible, those scripts could else be easily translated to `bash`.

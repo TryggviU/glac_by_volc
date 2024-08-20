@@ -6,7 +6,7 @@ Repository for code\* used to locate glaciers within a radial distance from volc
 
 
 
-## Volcanic controls on glacier elevation - Abstract
+## Volcanic controls on glacier elevation - Abstract (IGS British Branch poster)
 
 Glaciated volcanoes pose heightened risk to societies compared to their ice-free counterparts. Monitoring of glaciovolcanic processes is therefore of vital importance, as traditional surveys of volcanic activity may be hindered by glacier cover and/or remoteness. Volcanic activity has the potential of asserting controls on the dynamics and mass balance of nearby glaciers. Previous studies have shown that overlying glaciers of some volcanoes are bound to higher elevations than other neighbouring glaciers. Here we analyse global datasets of volcanoes and glacier geometries to delineate local trends in glacier elevation, and  assess the effect of volcanism. Additionally, we utilise multispectral and synthetic aperture radar images from the Sentinel satellites to automatically track glacier elevation changes. We demonstrate that, globally, volcanoes modulate the elevation of overlying glaciers, irrespective of local topography and climate. We further present some initial results from our automated annual tracking of glacier elevations, showing diverging trends between glaciers proximal and distal to volcanoes.
 
@@ -34,27 +34,24 @@ $$\overline{\tilde{z}} = \frac{1}{n} \sum_{i=1}^{n} \tilde{z}\_i$$
 
 is the average median glacier elevation within the region, comprising of $n$ glaciers.
 
+### Multiple linear regression
+
+To identify parameter relations, we use multiple linear regression
+
+$$y_i = \beta_0 + \sum_{j=1}^{n} \beta_j x_{ij},$$
+
+where $y_i$ are the target variables, $x_{ij}$ are the explanatory variables, and $\beta_j$ are regression coefficients. We use two Python libraries, [SciPy](https://scipy.org/) and [statsmodels](https://www.statsmodels.org), to carry out the linear regression to ensure consistent results.
+
 ### Timeseries of glacier area
 
-The code extracts glacier area from both synthetic aperature radar (SAR) and multispectral/optical images from Sentinel 1 and 2, respectively [(Barella et al., 2022)](https://doi.org/10.1109/JSTARS.2022.3179050). The SAR scenes are processed into InSAR pairs, and glacier geometries are extracted by applying a threshold to the coherence maps between pairs. The optical scenes are stitched into cloud- and snow-free mosaics, and snow and ice pixels in the mosaic are extracted by: (i) applying a threshold to the [normalized difference snow index (NDSI)](https://custom-scripts.sentinel-hub.com/sentinel-2/ndsi/) that is computed from the sensor's bands, and (ii) a combinations of band thresholds according to the [Level-2A Algorithm](https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview).
+The code extracts glacier area from both synthetic aperature radar (SAR) and multispectral/optical images from Sentinel 1 and 2, respectively [(Barella et al., 2022)](https://doi.org/10.1109/JSTARS.2022.3179050). The SAR scenes are processed into InSAR pairs, and glacier geometries are extracted by applying a threshold to the coherence maps between pairs. The optical scenes are stitched into cloud- and snow-free mosaics, and snow and ice pixels in the mosaic are extracted by: (i) applying a threshold to the [normalized difference snow index (NDSI)](https://custom-scripts.sentinel-hub.com/sentinel-2/ndsi/) that is computed from the sensor's bands, and (ii) a combinations of band thresholds according to the [Level-2A Algorithm](https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview). We use the facilities made available by [Alaska Satellite Facility (ASF)](https://asf.alaska.edu/) to produce InSAR products from Sentinel 1 scenes of an area of interest, and [Google Earth Engine (GEE)](https://earthengine.google.com/) to produce cloud free mosaics from Sentinel 2 scenes of an area of interest. The code then identifies glaciated pixels within buffered RGI glacier geometries (**Fig. 1**) and attributes those to each respective glacier.
 
-| ![Image of bla](figs/glacier_buffer_example.png) |
+| ![Buffered RGI glacier geometries](figs/glacier_buffer_example.png) |
 |--|
-| **Fig. 1.** *Blablabla* |
+| **Fig. 1.** *Examples of buffered (red) RGI glacier geometries (blue), along with a buffered convex hull geometry (yellow) used for data reductions.* |
 
 
-## Data
 
-### RGI and GPV
+## Preliminary results
 
-Prior to any analysis, it is assumed that the user has previously downloaded the global glacier and volcano datasets from:
- - [Randolph Glacier Inventory (RGI)](http://www.glims.org/rgi_user_guide/welcome.html): The version used during the developement of the code is v7.0.
- - [Global Volcanism Program (GVP)](https://volcano.si.edu/volcanolist_holocene.cfm): The GVP data is downloaded as an Microsoft Excel file by default, and the user must convert it to a `.csv` file prior to executing scripts.
-
-and stored the data within their respective subdirectories, [data/RGI](./data/RGI) and [data/GVP](./data/GVP). The resulting processed data is then stored within the subdirectory [data_processed](./data_processed).
-
-### Satellite imagery
-
-The code uses the facilities made available by 
- - [Alaska Satellite Facility (ASF)](https://asf.alaska.edu/): to produce InSAR products from Sentinel 1 scenes of an area of interest.
- - [Google Earth Engine (GEE)](https://earthengine.google.com/): to produce cloud free mosaics from Sentinel 2 scenes of an area of interest.
+Please see the poster presented at IGS British Branch meeting 2024.

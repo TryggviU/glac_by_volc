@@ -36,19 +36,23 @@ is the average median glacier elevation within the region, comprising of $n$ gla
 
 ### Multiple linear regression
 
-To identify parameter relations, we use multiple linear regression
+To identify parameter relations, we use multiple linear regression (**Fig. 1**)
 
 $$y_i = \beta_0 + \sum_{j=1}^{n} \beta_j x_{ij},$$
 
 where $y_i$ are the target variables, $x_{ij}$ are the explanatory variables, and $\beta_j$ are regression coefficients. We use two Python libraries, [SciPy](https://scipy.org/) and [statsmodels](https://www.statsmodels.org), to carry out the linear regression to ensure consistent results.
 
+| ![Glacier median elevation fit](figs/global_dzmed_scatter_legend.png) |
+|--|
+| **Fig. 1.** *Example of fitting the relative median elevation of glaciers to the distance from volcanoes.* |
+
 ### Timeseries of glacier area
 
-The code extracts glacier area from both synthetic aperature radar (SAR) and multispectral/optical images from Sentinel 1 and 2, respectively [(Barella et al., 2022)](https://doi.org/10.1109/JSTARS.2022.3179050). The SAR scenes are processed into InSAR pairs, and glacier geometries are extracted by applying a threshold to the coherence maps between pairs. The optical scenes are stitched into cloud- and snow-free mosaics, and snow and ice pixels in the mosaic are extracted by: (i) applying a threshold to the [normalized difference snow index (NDSI)](https://custom-scripts.sentinel-hub.com/sentinel-2/ndsi/) that is computed from the sensor's bands, and (ii) a combinations of band thresholds according to the [Level-2A Algorithm](https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview). We use the facilities made available by [Alaska Satellite Facility (ASF)](https://asf.alaska.edu/) to produce InSAR products from Sentinel 1 scenes of an area of interest, and [Google Earth Engine (GEE)](https://earthengine.google.com/) to produce cloud free mosaics from Sentinel 2 scenes of an area of interest. The code then identifies glaciated pixels within buffered RGI glacier geometries (**Fig. 1**) and attributes those to each respective glacier.
+The code extracts glacier area from both synthetic aperature radar (SAR) and multispectral/optical images from Sentinel 1 and 2, respectively [(Barella et al., 2022)](https://doi.org/10.1109/JSTARS.2022.3179050). The SAR scenes are processed into InSAR pairs, and glacier geometries are extracted by applying a threshold to the coherence maps between pairs. The optical scenes are stitched into cloud- and snow-free mosaics, and snow and ice pixels in the mosaic are extracted by: (i) applying a threshold to the [normalized difference snow index (NDSI)](https://custom-scripts.sentinel-hub.com/sentinel-2/ndsi/) that is computed from the sensor's bands, and (ii) a combinations of band thresholds according to the [Level-2A Algorithm](https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview). We use the facilities made available by [Alaska Satellite Facility (ASF)](https://asf.alaska.edu/) to produce InSAR products from Sentinel 1 scenes of an area of interest, and [Google Earth Engine (GEE)](https://earthengine.google.com/) to produce cloud free mosaics from Sentinel 2 scenes of an area of interest. The code then identifies glaciated pixels within buffered RGI glacier geometries (**Fig. 2**) and attributes those to each respective glacier.
 
 | ![Buffered RGI glacier geometries](figs/glacier_buffer_example.png) |
 |--|
-| **Fig. 1.** *Examples of buffered (red) RGI glacier geometries (blue), along with a buffered convex hull geometry (yellow) used for data reductions.* |
+| **Fig. 2.** *Examples of buffered (red) RGI glacier geometries (blue), along with a buffered convex hull geometry (yellow) used for data reductions.* |
 
 
 

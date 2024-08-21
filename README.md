@@ -32,7 +32,7 @@ where
 
 $$\overline{\tilde{z}} = \frac{1}{n} \sum_{i=1}^{n} \tilde{z}\_i$$
 
-is the average median glacier elevation within the region, comprising of $n$ glaciers.
+is the average median glacier elevation within the radial area, comprising of $n$ glaciers.
 
 ### Multiple linear regression
 

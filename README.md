@@ -39,7 +39,7 @@ is the average median glacier elevation within the radial area, comprising of $n
 We use three trend tests to investigate how glacier elevations change with distance from volcanoes.
 1. Linear regression using [SciPy](https://scipy.org/) and [statsmodels](https://www.statsmodels.org/stable/index.html)
 2. Mann-Kendall trend test using [pyMannKendall](https://pypi.org/project/pymannkendall/)
-3. Spearman's rho test using [SciPy]
+3. Spearman's rho test using [SciPy](https://scipy.org/)
 All three tests give a correlation coefficient/statistic $-1 \leq r \leq 1$, with $\pm 1$ indicating a perfect linear/monotonic trend where the sign denoting the direction (positive or negative) direction of the trend. If glacier elevations decrease away from volcanoes we would expect a coefficient $r < 0$.
 
 
@@ -54,8 +54,3 @@ Prior to any analysis, it is assumed that the user has previously downloaded the
 and stored the data within their respective subdirectories, [data/RGI](./data/RGI) and [data/GVP](./data/GVP). The resulting processed data is then stored within the subdirectory [data_processed](./data_processed).
 
 
-
-
-## Preliminary results
-
-Please see the poster presented at IGS British Branch meeting 2024.

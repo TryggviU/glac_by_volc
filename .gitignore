@@ -1,3 +1,20 @@
+# Ignore data and figure directories.
+data/ASF*
+data/GVP*
+data/RGI*
+data_processed/regional_files*
+data_processed/global_files*
+data_processed/temp*
+figs/
+
+# Ignore all logs
+*.log
+.idea/
+**.idea
+**.ipynb_checkpoints
+.netrc
+**/__pycache__
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

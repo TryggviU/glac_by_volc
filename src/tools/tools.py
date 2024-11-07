@@ -143,4 +143,16 @@ def join_df(df1, df2):
         return pd.concat([df1, df2], ignore_index=True)
 
 
+def df_moving_average(data, x, y, xmin, xmax, dx):
+    df = pd.DataFrame(
+        {x: [xmin + i*dx for i in range(int((xmax-xmin)/dx + 1))],
+         y: [float("nan") for i in range(int((xmax-xmin)/dx + 1))]}
+    )
 
+    for i in range(1, len(df[x])-1):
+        df.loc[i, y] = data.loc[(df.loc[i - 1, x] < data[x]) & (data[x] < df.loc[i + 1, x]), y].mean()
+
+    df.loc[0, y] = data.loc[data[x] < df.loc[1, x], y].mean()
+    df.loc[int((xmax-xmin)/dx + 1), y] = data.loc[df.loc[int((xmax-xmin)/dx), x] < data[x], y].mean()
+
+    return df

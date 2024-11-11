@@ -50,7 +50,7 @@ parser.add_argument("-x", "--exogenous", action="store", nargs="*", type=str, de
                     help="The explanatory (exogenous) variable(s).")
 parser.add_argument("-y", "--endogenous", action="store", nargs="*", type=str, default=["dzmed"],
                     help="The target (endogenous) variable.")
-parser.add_argument("-n", "--n_min", action="store", nargs="*", type=int, default=3,
+parser.add_argument("-n", "--n_min", action="store", nargs="*", type=int, default=4,
                     help="The explanatory (exogenous) variable(s).")
 parser.add_argument("-a", "--years", action="store", nargs=2, type=int, default=[1990, 2010],
                     help="The years that set the time period that should be checked for eruptions.")
@@ -233,7 +233,7 @@ def is_mostly_nan(df, cols, n_min=args.n_min):
         if np.isnan(df[col]).all():
             return True
 
-        if len(df[col]) - np.isnan(df[col]).sum() <= n_min:
+        if len(df[col]) - np.isnan(df[col]).sum() < n_min:
             return True
 
     return False

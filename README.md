@@ -48,7 +48,7 @@ To run the trend analysis simply execute:
 ```
 
 | Option | Variable| Default Input |
-|----------| |---------------|
+|-|-|-|
 | `-r` | Radii | `5 10 20 40` |
 | `-x` | Explanatory variable | `distance` |
 | `-y` | Target variable | `dzmed` |

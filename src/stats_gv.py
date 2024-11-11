@@ -51,7 +51,7 @@ parser.add_argument("-x", "--exogenous", action="store", nargs="*", type=str, de
 parser.add_argument("-y", "--endogenous", action="store", nargs="*", type=str, default=["dzmed"],
                     help="The target (endogenous) variable.")
 parser.add_argument("-n", "--n_min", action="store", nargs="*", type=int, default=4,
-                    help="The explanatory (exogenous) variable(s).")
+                    help="The minimum number of glaciers to be used when fitting results.")
 parser.add_argument("-a", "--years", action="store", nargs=2, type=int, default=[1990, 2010],
                     help="The years that set the time period that should be checked for eruptions.")
 # Read arguments from the command line

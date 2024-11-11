@@ -47,13 +47,13 @@ To run the trend analysis simply execute:
 ..\glac_by_volc>python src\stats_gv.py -r RADIUS1 RADIUS2 ... -x EXOGENOUS -y ENDOGENOUS -n N_MINIMUM -a YEAR1 YEAR2
 ```
 
-| Variable | Default Input |
-|----------|---------------|
-| `-r` | `5 10 20 40` |
-| `-x` | `distance` |
-| `-y` | `dzmed` |
-| `-n` | `4` |
-| `-a` | `1990 2010` |
+| Option | Variable| Default Input |
+|----------| |---------------|
+| `-r` | Radii | `5 10 20 40` |
+| `-x` | Explanatory variable | `distance` |
+| `-y` | Target variable | `dzmed` |
+| `-n` | Minimum number of glaciers | `4` |
+| `-a` | Target years | `1990 2010` |
 
 ## Data
 

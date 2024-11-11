@@ -42,6 +42,18 @@ We use three trend tests to investigate how glacier elevations change with dista
 3. Spearman's rho test using [SciPy](https://scipy.org/)
 All three tests give a correlation coefficient/statistic $-1 \leq r \leq 1$, with $\pm 1$ indicating a perfect linear/monotonic trend where the sign denoting the direction (positive or negative) direction of the trend. If glacier elevations decrease away from volcanoes we would expect a coefficient $r < 0$.
 
+To run the trend analysis simply execute:
+```
+..\glac_by_volc>python src\stats_gv.py -r RADIUS1 RADIUS2 ... -x EXOGENOUS -y ENDOGENOUS -n N_MINIMUM -a YEAR1 YEAR2
+```
+
+| Variable | Default Input |
+|----------|---------------|
+| `-r` | `5 10 20 40` |
+| `-x` | `distance` |
+| `-y` | `dzmed` |
+| `-n` | `4` |
+| `-a` | `1990 2010` |
 
 ## Data
 

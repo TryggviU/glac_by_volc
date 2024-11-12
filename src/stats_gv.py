@@ -46,14 +46,6 @@ RGI_v = os.path.basename(
         filename="RGI"
     )[0]
 )[0:12]
-# Read in the RGI region codes/names.
-RGI_regions = gv_proc.read_rgi(
-    path=tools.find_files_within_path(
-        path=dir_data,
-        filename="o1regions-summary.csv"
-    )[0]
-)["long_code"].drop_duplicates().tolist()
-RGI_regions.remove('20_antarctic_mainland')
 
 # Initiate the argument parser.
 parser = argparse.ArgumentParser()

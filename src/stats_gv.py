@@ -1,9 +1,23 @@
+"""
+Script used to:
+ (1) Find documented eruptions of volcanoes within RGI regions.
+ (2) Compute trends for the glaciers around the volcanoes.
+The user must first have successfully run the 'volc_in_rgi.py' script.
+
+Input:
+Data file* from GVP - https://volcano.si.edu/search_eruption.cfm and outputs from previous scripts.
+*file must be converted from .xml to .csv prior to usage.
+
+
+Output:
+.csv file(s) with the stats for each volcano, stored in the "results" subdirectory.
+"""
+
 # System
 import os
 # Basic
 import numpy as np
 import pandas as pd
-from tqdm import tqdm
 # Arguments
 import argparse
 # Geospatial data

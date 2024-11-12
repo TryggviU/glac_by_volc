@@ -6,17 +6,29 @@ Repository for code\* used to locate glaciers within a radial distance from volc
 
 
 
+## Data
+
+### RGI and GPV
+
+Prior to any analysis, it is assumed that the user has previously downloaded the global glacier and volcano datasets:
+ - [Randolphs Glacier Inventory (RGI)](http://www.glims.org/rgi_user_guide/welcome.html): A dataset containing outlines and information for all glaciers in the World, excluding the ice sheets of Greenland and Antarctica, around the year 2000. The version used during the developement of the code is v7.0.
+ - [Smithsonian Global Volcanism Program (GVP)](https://volcano.si.edu/volcanolist_holocene.cfm): A complete list of Earth's [Holocene volcanoes](https://volcano.si.edu/volcanolist_holocene.cfm) and [eruptions](https://volcano.si.edu/search_eruption.cfm). The GVP data is downloaded as an Microsoft Excel file by default, and the user must convert it to a `.csv` file prior to executing scripts.
+
+Store the data within their respective subdirectories, [data/RGI](./data/RGI) and [data/GVP](./data/GVP). The resulting processed data is then saved to the subdirectory [data_processed](./data_processed).
+
+
+
 ## Methods
 
 ### Locating glaciers by volcanoes
 
-We locate glaciers within the vicinity of volcanoes by comparing two databases: The ``Volcanoes of the World'' of the [Smithsonian Global Volcanism Program (GVP)](https://volcano.si.edu/volcanolist_holocene.cfm) -- a complete list of Earth's Holocene volcanoes; and the [Randolph Glacier Inventory (RGI) version 7.0](http://www.glims.org/rgi_user_guide/welcome.html) -- a dataset containing outlines and information for all glaciers in the World, excluding the ice sheets of Greenland and Antarctica, in the year 2000. We locate all RGI glacier geometries within a radial search area around each GVP volcano with Python scripts utilising the geospatial data package [GeoPandas](https://geopandas.org/). The code effectively accomplishes the same as that of [Edwards et al. (2020)](https://doi.org/10.1016/j.gloplacha.2020.103356) who used a search radius of 5 km, but does so automatically and allows the user to specify the search radius. In our study we use 5, 10, 20, and 40 km search radii. Besides downloading this repository and the data (see [Data](#data)), the code is fully automated, with optional user inputs.
+We locate glaciers within the vicinity of volcanoes by comparing two databases: The ``Volcanoes of the World'' of the [Smithsonian Global Volcanism Program (GVP)](https://volcano.si.edu/volcanolist_holocene.cfm) ; and the [Randolph Glacier Inventory (RGI) version 7.0](http://www.glims.org/rgi_user_guide/welcome.html). We locate all RGI glacier geometries within a radial search area around each GVP volcano with Python scripts utilising the geospatial data package [GeoPandas](https://geopandas.org/). The code effectively accomplishes the same as that of [Edwards et al. (2020)](https://doi.org/10.1016/j.gloplacha.2020.103356) who used a search radius of 5 km, but does so automatically and allows the user to specify the search radius. In our study we use 5, 10, 20, and 40 km search radii as default. Besides downloading this repository and the data (see [Data](#data)), the code is fully automated, with optional user inputs.
 
-First step - finding all GVP volcanoes within RGI regions:
+1. Find all GVP volcanoes within RGI regions:
 ```
 ..\glac_by_volc>python src\volc_in_rgi.py
 ```
-Second step - find all glaciers within the search radius of each volcano:
+2. Find all glaciers within the search radius of each volcano:
 ```
 ..\glac_by_volc>python src\glac_by_volc.py -i RGI_IDs -r SEARCH_RADIUS -d DISPLAY
 ```
@@ -33,6 +45,7 @@ where
 $$\overline{\tilde{z}} = \frac{1}{n} \sum_{i=1}^{n} \tilde{z}\_i$$
 
 is the average median glacier elevation within the radial area, comprising of $n$ glaciers.
+
 
 ### Trend analysis
 
@@ -55,14 +68,8 @@ To run the trend analysis simply execute:
 | `-n` | Minimum number of glaciers | `4` |
 | `-a` | Target years | `1990 2010` |
 
-## Data
-
-### RGI and GPV
-
-Prior to any analysis, it is assumed that the user has previously downloaded the global glacier and volcano datasets from:
- - [Randolphs Glacier Inventory (RGI)](http://www.glims.org/rgi_user_guide/welcome.html): The version used during the developement of the code is v7.0.
- - [Global Volcanism Program (GVP)](https://volcano.si.edu/volcanolist_holocene.cfm): The GVP data is downloaded as an Microsoft Excel file by default, and the user must convert it to a `.csv` file prior to executing scripts.
-
-and stored the data within their respective subdirectories, [data/RGI](./data/RGI) and [data/GVP](./data/GVP). The resulting processed data is then stored within the subdirectory [data_processed](./data_processed).
 
 
+## Plotting results
+
+Execute this script to plot the results.

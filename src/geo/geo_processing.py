@@ -115,7 +115,7 @@ def shapes_within_rad(point, shapes, rad):
     return shapes_in_buffer_cut, shapes_in_buffer
 
 
-def shapes_within_gpd(gdf, shapes):
+def shapes_within_gdf(gdf, shapes):
     """
     Find all shapes/geometries that overlap with a GeoDataFrame.
 
@@ -190,3 +190,21 @@ def compute_distance(f1, f2, f3=gpd.GeoDataFrame()):
                     f2.loc[i, "distance"] = np.nan
 
     return f2
+
+
+def set_scalebar(E, N):
+    """
+    Set the scalebar size.
+
+    :param E: East coordinate
+    :param N: North coordinate
+    :return: a distance element for the scalebar.
+    """
+
+    pts = gpd.GeoSeries(
+        [Point(E, N), Point(E + 1, N)],
+        crs="EPSG:4326"
+    )
+    pts = pts.to_crs(pts.estimate_utm_crs())
+
+    return pts[0].distance(pts[1])

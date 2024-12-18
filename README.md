@@ -18,29 +18,28 @@ Store the data within their respective subdirectories, [data/RGI](./data/RGI) an
 
 
 
-## Scripts
+## Methods and scripts
 
-There are a few scripts that must be run to carry out the analysis of glaciers around volcanoes. Here are descriptions of what each script accomplishes, but the [Methods](#Methods) behind the scripts are described below.
-
-
-
-## Methods
+There are a few scripts that must be run to carry out the analysis of glaciers around volcanoes. Here are descriptions of what each script accomplishes as well as the methods it applies.
 
 ### Locating glaciers by volcanoes
 
 We locate glaciers within the vicinity of volcanoes by comparing two databases: The ``Volcanoes of the World'' of the [Smithsonian Global Volcanism Program (GVP)](https://volcano.si.edu/volcanolist_holocene.cfm) ; and the [Randolph Glacier Inventory (RGI) version 7.0](http://www.glims.org/rgi_user_guide/welcome.html). We locate all RGI glacier geometries within a radial search area around each GVP volcano with Python scripts utilising the geospatial data package [GeoPandas](https://geopandas.org/). The code effectively accomplishes the same as that of [Edwards et al. (2020)](https://doi.org/10.1016/j.gloplacha.2020.103356) who used a search radius of 5 km, but does so automatically and allows the user to specify the search radius. In our study we use 5, 10, 20, and 40 km search radii as default. Besides downloading this repository and the data (see [Data](#data)), the code is fully automated, with optional user inputs.
 
 1. Find all GVP volcanoes within RGI regions:
-```
+```python
 ..\glac_by_volc>python src\volc_in_rgi.py
 ```
 2. Find all glaciers within the search radius of each volcano:
-```
+```python
 ..\glac_by_volc>python src\glac_by_volc.py -i RGI_IDs -r SEARCH_RADIUS -d DISPLAY
 ```
+3. Aggregate all regional results to a single `.csv` file for simplified analysis and viewing (this is written in Powershell not Python).
+```bat
+PS ..\ps1> .\tools\join_attributes.ps1
+```
 
-
-### Relative glacier elevations
+### Relative glacier elevations and trend analysis
 
 We adopt the methodology of [Howcutt et al. (2023)](https://doi.org/10.1130/G51411.1), but adapt it to use the median glacier elevations, $\tilde{z}$, instead of ELAs. We compute the relative median elevation for each ($i$-th) individual glacier wtihin the locality, given by the search radius, of a volcano as
 
@@ -50,10 +49,7 @@ where
 
 $$\overline{\tilde{z}} = \frac{1}{n} \sum_{i=1}^{n} \tilde{z}\_i$$
 
-is the average median glacier elevation within the radial area, comprising of $n$ glaciers.
-
-
-### Trend analysis
+is the average median glacier elevation within the radial area, comprising of $n$ glaciers. The relative median glacier elevations are computed within the statistical trend analysis step.
 
 We use three trend tests to investigate how glacier elevations change with distance from volcanoes.
 1. Linear regression using [SciPy](https://scipy.org/) and [statsmodels](https://www.statsmodels.org/stable/index.html)
@@ -62,20 +58,35 @@ We use three trend tests to investigate how glacier elevations change with dista
 All three tests give a correlation coefficient/statistic $-1 \leq r \leq 1$, with $\pm 1$ indicating a perfect linear/monotonic trend where the sign denoting the direction (positive or negative) direction of the trend. If glacier elevations decrease away from volcanoes we would expect a coefficient $r < 0$.
 
 To run the trend analysis simply execute:
-```
+```python
 ..\glac_by_volc>python src\stats_gv.py -r RADIUS1 RADIUS2 ... -x EXOGENOUS -y ENDOGENOUS -n N_MINIMUM -a YEAR1 YEAR2
 ```
 
-| Option | Variable| Default Input |
-|-|-|-|
-| `-r` | Radii | `5 10 20 40` |
-| `-x` | Explanatory variable | `distance` |
-| `-y` | Target variable | `dzmed` |
-| `-n` | Minimum number of glaciers | `4` |
-| `-a` | Target years | `1990 2010` |
+The results from the trend analysis are saved in the [results](https://github.com/TryggviU/glac_by_volc/tree/main/results) directory.
 
 
 
 ## Plotting results
 
-Execute this script to plot the results.
+A few scripts are included to plot the results.
+
+### RGI and GVP plots
+
+```python
+..\glac_by_volc> 
+```
+
+
+## Script inputs
+
+| Option | Variable | Default Input |
+|-|-|-|
+| `-r` | Radii (in km) | `5 10 20 40` |
+| `-x` | Explanatory variable | `distance` |
+| `-y` | Target variable | `dzmed` |
+| `-n` | Minimum number of glaciers | `4` |
+| `-a` | Target years | `1990 2010` |
+| `-c` | Complete all volcanoes? | `False` |
+| `-d` | Display intermediate results? | `False` |
+
+

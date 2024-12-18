@@ -18,6 +18,12 @@ Store the data within their respective subdirectories, [data/RGI](./data/RGI) an
 
 
 
+## Scripts
+
+There are a few scripts that must be run to carry out the analysis of glaciers around volcanoes. Here are descriptions of what each script accomplishes, but the [Methods](https://github.com/TryggviU/glac_by_volc/main/README.md#Methods) behind the scripts are described below.
+
+
+
 ## Methods
 
 ### Locating glaciers by volcanoes

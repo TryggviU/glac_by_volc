@@ -1,7 +1,5 @@
 # System
 import os
-
-import matplotlib.pyplot as plt
 # Basic
 import numpy as np
 import pandas as pd
@@ -10,12 +8,9 @@ import argparse
 # Plotting
 import proplot as pplt
 import seaborn as sns
-from cmap import Colormap
 # Geospatial data
 import geopandas as gpd
-from geodatasets import get_path
 import contextily as cx
-from matplotlib_scalebar.scalebar import ScaleBar
 # Modules
 import geo.geo_processing as geo_proc
 import glacvolc.glacvolc_processing as gv_proc

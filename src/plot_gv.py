@@ -2,8 +2,6 @@
 import os
 # Arguments
 import argparse
-
-import matplotlib.pyplot as plt
 # Plotting
 import proplot as pplt
 from cmap import Colormap
@@ -45,8 +43,8 @@ parser.add_argument("-v", "--GVP_ids", action="store", nargs="*", type=int, defa
                     help="Select GVP identification number(s) of volcano(s).")
 parser.add_argument("-r", "--radius", action="store", nargs="*", type=float, default=[5, 10, 20, 40],
                     help="Maximum radial distance, in kilometres, of search buffer for glaciers surrounding volcano.")
-parser.add_argument("-a", "--all", action="store", nargs=1, type=bool, default=False,
-                    help="If set to True, then figs created for all volcanoes.")
+parser.add_argument("-e", "--everything", action="store", nargs=1, type=bool, default=False,
+                    help="If set to True, then figs created for every volcano.")
 parser.add_argument("-n", "--n_min", action="store", nargs="*", type=int, default=4,
                     help="The minimum number of glaciers to be used when fitting results.")
 parser.add_argument("-z", "--zmax", action="store", type=int, default=500,
@@ -54,7 +52,7 @@ parser.add_argument("-z", "--zmax", action="store", type=int, default=500,
 # Read arguments from the command line
 args = parser.parse_args()
 
-if args.all:
+if args.everything:
     args.radius = [5, 10, 20, 40]
     args.GVP_ids = gv_proc.read_gvp(
         tools.find_files_within_path(

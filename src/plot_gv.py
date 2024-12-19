@@ -211,7 +211,7 @@ def plot_volc_dzmed(GVP_id, radius, cmap=Colormap('colorbrewer:RdYlBu_r').to_mpl
 
     # Add a grayscale background map.
     cx.add_basemap(ax=ax, crs=gdf.crs, alpha=0.5, zoom=12,
-                   source=cx.providers.NASAGIBS.ASTER_GDEM_Greyscale_Sh aded_Relief, attribution=False)
+                   source=cx.providers.NASAGIBS.ASTER_GDEM_Greyscale_Shaded_Relief, attribution=False)
     # Reset the aspect to the original.
     ax.set_aspect(aspect)
 

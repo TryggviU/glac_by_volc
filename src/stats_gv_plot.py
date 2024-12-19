@@ -68,7 +68,7 @@ parser.add_argument("-f", "--fit", action="store", nargs="*", type=str, default=
 parser.add_argument("-p", "--pvalue", action="store", nargs="*", type=float, default=[1],
                     help="The maximum p-value that should be plotted.")
 parser.add_argument("-c", "--compute", action="store", type=bool, default=True,
-                    help="The maximum p-value that should be plotted.")
+                    help="Whether to compute from scratch or read results from previous run.")
 # Read arguments from the command line
 args = parser.parse_args()
 

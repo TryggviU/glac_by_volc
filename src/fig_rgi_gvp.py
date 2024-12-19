@@ -2,21 +2,14 @@
 import os
 
 # Basic
-import matplotlib.pyplot as plt
 import proplot as pplt
-import numpy as np
 import pandas as pd
 
 # Geospatial data
 import geopandas as gpd
-import pyproj
-import rasterio
-from shapely.geometry import Point, Polygon
-from geodatasets import get_path
 import contextily as cx
 
 # Modules.
-import geo.geo_processing as geo_proc
 import glacvolc.glacvolc_processing as gv_proc
 import tools.tools as tools
 

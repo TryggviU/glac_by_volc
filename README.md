@@ -59,7 +59,7 @@ All three tests give a correlation coefficient/statistic $-1 \leq r \leq 1$, wit
 
 To run the trend analysis simply execute:
 ```python
-..\glac_by_volc>python src\stats_gv.py -r RADIUS1 RADIUS2 ... -x EXOGENOUS -y ENDOGENOUS -n N_MINIMUM -a YEAR1 YEAR2
+..\glac_by_volc>python src\gv_stats.py -r RADIUS1 RADIUS2 ... -x EXOGENOUS -y ENDOGENOUS -n N_MINIMUM -a YEAR1 YEAR2
 ```
 
 The results from the trend analysis are saved in the [results](https://github.com/TryggviU/glac_by_volc/tree/main/results) directory.
@@ -74,19 +74,19 @@ A couple of scripts are included to plot the results.
 
 To plot the global distribution of volcanoes, glaciers, and glaciated volcanoes run:
 ```python
-..\glac_by_volc>python src\fig_rgi_gvp.py
+..\glac_by_volc>python src\plot_rgi_gvp.py
 ```
 
 ### Relative glacier elevations and trend analysis
 
 To plot the results from the statistical trend analysis run:
 ```python
-..\glac_by_volc>python src\stats_gv_plot.py -r RADIUS -s STAT -f FIT -p P_VALUE -c COMPUTE
+..\glac_by_volc>python src\plot_gv_stats.py -r RADIUS -s STAT -f FIT -p P_VALUE -c COMPUTE
 ```
 
 To plot the relative median glacier elevations around volcanoes run:
 ```python
-..\glac_by_volc>python src\gv_plot.py -v GVP_IDs -r RADIUS -e EVERYTHING -n N_MINIMUM -z Z_MAX
+..\glac_by_volc>python src\plot_gv.py -v GVP_IDs -r RADIUS -e EVERYTHING -n N_MINIMUM -z Z_MAX
 ```
 
 

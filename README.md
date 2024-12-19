@@ -68,13 +68,27 @@ The results from the trend analysis are saved in the [results](https://github.co
 
 ## Plotting results
 
-A few scripts are included to plot the results.
+A couple of scripts are included to plot the results.
 
 ### RGI and GVP plots
 
+To plot the global distribution of volcanoes, glaciers, and glaciated volcanoes run:
 ```python
-..\glac_by_volc> 
+..\glac_by_volc>python src\fig_rgi_gvp.py
 ```
+
+### Relative glacier elevations and trend analysis
+
+To plot the results from the statistical trend analysis run:
+```python
+..\glac_by_volc>python src\stats_gv_plot.py -r RADIUS -s STAT -f FIT -p P_VALUE -c COMPUTE
+```
+
+To plot the relative median glacier elevations around volcanoes run:
+```python
+..\glac_by_volc>python src\gv_plot.py -v GVP_IDs -r RADIUS -e EVERYTHING -n N_MINIMUM -z Z_MAX
+```
+
 
 
 ## Script inputs
@@ -88,5 +102,7 @@ A few scripts are included to plot the results.
 | `-a` | Target years | `1990 2010` |
 | `-c` | Complete all volcanoes? | `False` |
 | `-d` | Display intermediate results? | `False` |
+| `-e` | Run every volcano? | `False` |
+| `-z` | Max relative value to plot. | `500` |
 
 

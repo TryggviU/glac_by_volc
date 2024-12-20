@@ -34,7 +34,7 @@ We locate glaciers within the vicinity of volcanoes by comparing two databases: 
 ```python
 ..\glac_by_volc>python src\glac_by_volc.py -i RGI_IDs -r SEARCH_RADIUS -d DISPLAY
 ```
-3. Aggregate all regional results to a single `.csv` file for simplified analysis and viewing (this is written in Powershell not Python).
+3. ***Not needed if the plot scripts below are used:*** Aggregate all regional results to a single `.csv` file for simplified analysis and viewing (this is written in Powershell not Python).
 ```bat
 PS ..\ps1> .\tools\join_attributes.ps1
 ```

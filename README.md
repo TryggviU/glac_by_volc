@@ -72,10 +72,17 @@ A couple of scripts are included to plot the results.
 
 ### RGI and GVP plots
 
-To plot the global distribution of volcanoes, glaciers, and glaciated volcanoes run:
+To plot the global distribution of volcanoes, glaciers, and glaciated volcanoes* run:
 ```python
 ..\glac_by_volc>python src\plot_rgi_gvp.py
 ```
+*Note that the figure does not come with a legend or labels for the RGI region polygons.
+
+![The world's glaciers, volcanoes, and glaciated volcanoes](/figs/rgi_gvp_lowres.png "The world's glaciers, volcanoes, and glaciated volcanoes.")
+
+**Legend:** `(Blue poligons) Glaciers (red dots) Holocene volcanoes - (Triangles) Glaciated volcanoes (red) 5 km (dark orange) 10 km (light orange) 20 km (yellow) 40 km.`
+
+
 
 ### Relative glacier elevations and trend analysis
 
@@ -84,10 +91,18 @@ To plot the results from the statistical trend analysis run:
 ..\glac_by_volc>python src\plot_gv_stats.py -r RADIUS -s STAT -f FIT -p P_VALUE -c COMPUTE
 ```
 
+![Trend analysis of the world's glaciated volcanoes showing that 80% of volcanoes have higher median glacier elevations.](/figs/trend_map_dzmed-SR_5.0km_lowres.png "Trend analysis of the world's glaciated volcanoes showing that 80% of volcanoes have higher median glacier elevations.")
+
+**Legend:** `The local trend of median glacier elevations (MGE) for 5 km around glacierised volcanoes. Red and blue dots denote rising and lowering, respectively, median glacier elevations towards volcanoes based on the Spearman's Rho test. Up to 80% of Earth's volcanoes demonstrate higher median glacier elevations closer to volcanoes.`
+
 To plot the relative median glacier elevations around volcanoes run:
 ```python
 ..\glac_by_volc>python src\plot_gv.py -v GVP_IDs -r RADIUS -e EVERYTHING -n N_MINIMUM -z Z_MAX
 ```
+
+![An example of higher median glacier elevations arround Mount Wrangell in Alaska.](/figs/315020_40.0km-dzmed_lowres.png "An example of higher median glacier elevations arround Mount Wrangell in Alaska.")
+
+**Legend:** `An example of median glacier elevations rising towards Mount Wrangell volcano, Alaska. The glaciers within 40 km of Mount Wrangell are coloured according to their relative median elevation.`
 
 
 

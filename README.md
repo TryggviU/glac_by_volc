@@ -11,8 +11,8 @@ Repository for code\* used to locate glaciers within a radial distance from volc
 ### RGI and GPV
 
 Prior to any analysis, it is assumed that the user has previously downloaded the global glacier and volcano datasets:
- - [Randolphs Glacier Inventory (RGI)](http://www.glims.org/rgi_user_guide/welcome.html): A dataset containing outlines and information for all glaciers in the World, excluding the ice sheets of Greenland and Antarctica, around the year 2000. The version used during the developement of the code is v7.0.
- - [Smithsonian Global Volcanism Program (GVP)](https://volcano.si.edu/volcanolist_holocene.cfm): A complete list of Earth's [Holocene volcanoes](https://volcano.si.edu/volcanolist_holocene.cfm) and [eruptions](https://volcano.si.edu/search_eruption.cfm). The GVP data is downloaded as an Microsoft Excel file by default, and the user must convert it to a `.csv` file prior to executing scripts.
+ - [Randolphs Glacier Inventory (RGI)](http://www.glims.org/rgi_user_guide/welcome.html): A dataset containing outlines and information for all glaciers in the World, excluding the ice sheets of Greenland and Antarctica, around the target year 2000. The version used during the developement of the code is v7.0.
+ - [Smithsonian Global Volcanism Program (GVP)](https://volcano.si.edu/volcanolist_holocene.cfm): A complete list of Earth's [Holocene volcanoes](https://volcano.si.edu/volcanolist_holocene.cfm) and [eruptions](https://volcano.si.edu/search_eruption.cfm). The GVP data is downloaded as an Microsoft Excel file by default, and the user themselves must convert it to a `.csv` file prior to executing scripts.
 
 Store the data within their respective subdirectories, [data/RGI](./data/RGI) and [data/GVP](./data/GVP). The resulting processed data is then saved to the subdirectory [data_processed](./data_processed).
 

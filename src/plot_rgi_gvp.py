@@ -53,7 +53,19 @@ for radius in [5, 10, 20, 40]:
                 encoding='latin-1'
             )
         except FileNotFoundError:
-            continue
+            subdir_rgi = os.path.join(dir_data_proc, "regional_files", f"{RGI_v}-GV", f"{RGI_v}-GV-{rgi_id}")
+
+            if os.path.exists(os.path.join(subdir_rgi, f"{rgi_id}_{float(radius)}km")):
+                csvs = tools.find_files_within_path(
+                    path=os.path.join(subdir_rgi, f"{rgi_id}_{float(radius)}km"),
+                    filename="-attributes.csv"
+                )
+                df = pd.concat(
+                    map(pd.read_csv, csvs), ignore_index=True
+                )
+                df.to_csv(os.path.join(subdir_rgi, f"{rgi_id}_{float(radius)}km-attributes.csv"))
+            else:
+                continue
 
         gdf = gpd.GeoDataFrame(
             data=df,

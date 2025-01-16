@@ -329,7 +329,7 @@ def plot_dz_scatter(compute=True):
                 colors=["red"],
                 labels=[f"${int(np.round(trend.slope))}\pm{int(np.ceil(trend.stderr))}$ m/km"]
             ),
-            loc="lower left"
+            label="Linear fit", loc="lower left"
         )
 
         for j, dz in enumerate(["dzmin", "dzmax", "dzmed"]):
@@ -349,6 +349,7 @@ def plot_dz_scatter(compute=True):
             labels=["Maximum", "Median", "Minimum"],
             linestyles=["--", "-", "dotted"]
         ),
+        label="Moving average",
         ncols=1, loc="upper right", fontsize="xx-large"
     )
 
@@ -356,10 +357,93 @@ def plot_dz_scatter(compute=True):
     pplt.close(fig)
 
 
+def plot_dz_scatter_single(radius, compute=True):
+    pplt.rc.update({'legend.fontsize': 'large', 'legend.title_fontsize': 'large'})
+
+    fig, ax = pplt.subplots(figsize=(8, 4.5), tight=True)
+    ax.format(xlabel="Distance from volcanoes [km]", ylabel="Relative glacier elevations [m]", labelsize=20,
+              linewidth=1, tickwidth=1, ticklabelsize=16)
+    if radius > 10:
+        ax.format(xlocator=5, xminorlocator=1, ylocator=1000, yminorlocator=100)
+    else:
+        ax.format(xlocator=1, xminorlocator=1, ylocator=1000, yminorlocator=100)
+
+    colors = ["black", "black", "black"]
+    linestyles = ["dotted", "--", "-"]
+
+    rgi_rad = gv_glaciers(radius=radius, compute=compute)
+    rgi_rad["distance"] *= 1e-3
+
+    sns.scatterplot(
+        ax=ax, data=rgi_rad, x="distance", y="dzmed", marker=".",
+        color="tab:blue", alpha=0.3,
+    )
+
+    # Compute the linear trend within 5 km of volcanoes.
+    trend5 = sfit.SimpleLinearRegression(df=rgi_rad[rgi_rad["distance"] <= 5], col_x="distance", col_y="dzmed")
+    print(trend5)
+
+    # Plot the trend within 5 km of volcanoes and add a legend with the trend.
+    sns.lineplot(ax=ax, x=[0, 5], y=[trend5.intercept, trend5.intercept + 5 * trend5.slope],
+                 color="red", linewidth=2, legend=False)
+
+    # Compute the linear trend outside 5 km of volcanoes.
+    if radius > 5:
+        trend = sfit.SimpleLinearRegression(df=rgi_rad[rgi_rad["distance"] > 5], col_x="distance", col_y="dzmed")
+
+        # Plot the trend outside 5 km of volcanoes and add a legend with the trend.
+        sns.lineplot(ax=ax, x=[5, radius], y=[trend.intercept + 5 * trend.slope, trend.intercept + radius * trend.slope],
+                     color="red", linestyle="--", linewidth=2, legend=False)
+
+        ax.legend(
+            tkn.intermediate_lineplot(
+                colors=["red", "red"], linestyles=["-", "--"],
+                labels=[f"${int(np.round(trend5.slope))}\pm{int(np.ceil(trend5.stderr))}$ m/km",
+                        f"${int(np.round(trend.slope))}\pm{int(np.ceil(trend.stderr))}$ m/km"]
+            ),
+            label="Linear fit",
+            loc="lower left"
+        )
+    else:
+        ax.legend(
+            tkn.intermediate_lineplot(
+                colors=["red"],
+                labels=[f"${int(np.round(trend5.slope))}\pm{int(np.ceil(trend5.stderr))}$ m/km"]
+            ),
+            label="Linear fit",
+            loc="lower left"
+        )
+
+    for j, dz in enumerate(["dzmin", "dzmax", "dzmed"]):
+        df = tools.df_moving_average(data=rgi_rad, x="distance", y=dz, xmin=0, xmax=radius, dx=0.1)
+        for k in range(1):
+            df[dz] = df[dz].rolling(4, min_periods=1).mean()
+
+        sns.lineplot(
+            ax=ax, data=df, x="distance", y=dz, color=colors[j], linestyle=linestyles[j], legend=False
+        )
+
+    ax.format(xlim=[0, radius])
+
+    ax.legend(
+        tkn.intermediate_lineplot(
+            colors=colors,
+            labels=["Maximum", "Median", "Minimum"],
+            linestyles=["--", "-", "dotted"]
+        ),
+        label="Moving average",
+        ncols=1, loc="upper right", fontsize="xx-large"
+    )
+
+    fig.savefig(os.path.join(dir_figs, f"global_dzmed_scatter_{float(radius)}km.png"))  # , transparent=True)
+    pplt.close(fig)
+
+
 def main():
-    # plot_dz_scatter(compute=False)
+    plot_dz_scatter(compute=False)
 
     for radius in args.radius:
+        plot_dz_scatter_single(radius=radius, compute=False)
         for stat in args.stat:
             for fit in args.fit:
                 for p in args.pvalue:

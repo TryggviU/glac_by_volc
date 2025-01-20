@@ -2,8 +2,6 @@
 
 Repository for code\* used to locate glaciers within a radial distance from volcanoes, and perform analysis on the geometries and dynamics of those glaciers. 
 
-> \*The code will be made available upon publication of results.
-
 
 
 ## Data

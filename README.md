@@ -1,6 +1,6 @@
 # Glaciers by volcanoes - `glac_by_volc`
 
-Repository for code\* used to locate glaciers within a radial distance from volcanoes, and perform analysis on the geometries and dynamics of those glaciers. 
+Repository for code used to locate glaciers within a radial distance from volcanoes, and perform analysis on the geometries and dynamics of those glaciers. 
 
 
 

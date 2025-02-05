@@ -53,6 +53,7 @@ We use three trend tests to investigate how glacier elevations change with dista
 1. Linear regression using [SciPy](https://scipy.org/) and [statsmodels](https://www.statsmodels.org/stable/index.html)
 2. Mann-Kendall trend test using [pyMannKendall](https://pypi.org/project/pymannkendall/)
 3. Spearman's rho test using [SciPy](https://scipy.org/)
+
 All three tests give a correlation coefficient/statistic $-1 \leq r \leq 1$, with $\pm 1$ indicating a perfect linear/monotonic trend where the sign denoting the direction (positive or negative) direction of the trend. If glacier elevations decrease away from volcanoes we would expect a coefficient $r < 0$.
 
 To run the trend analysis simply execute:

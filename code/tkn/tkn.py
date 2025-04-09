@@ -70,9 +70,11 @@ def intermediate_lineplot(colors, labels, linestyles=None):
 
 def intermediate_figure(cmap, vmin, vmax, levels):
     # An intermediary figure to get the colormap for the matplotlib figure.
-    fig_i, ax_i = plt.subplots()
-    contourf_plot = ax_i.contourf([[0, 0], [1, 1]], [[0, 1], [0, 1]], [[vmin, vmin], [vmin, vmax]],
-                                  cmap=cmap, vmin=vmin, vmax=vmax, levels=levels)
-    plt.close(fig_i)
+    fig_i, ax_i = pplt.subplots(ncols=1, nrows=1)
+    m = ax_i.pcolormesh(
+        [[0, 0], [1, 1]], [[0, 1], [0, 1]], [[vmin, vmin], [vmin, vmax]],
+        cmap=cmap, vmin=vmin, vmax=vmax, extend='both', levels=levels
+    )
+    pplt.close(fig_i)
 
-    return contourf_plot
+    return m

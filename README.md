@@ -26,11 +26,11 @@ We locate glaciers within the vicinity of volcanoes by comparing two databases: 
 
 1. Find all GVP volcanoes within RGI regions:
 ```python
-..\glac_by_volc>python src\volc_in_rgi.py
+..\glac_by_volc>python code\volc_in_rgi.py
 ```
 2. Find all glaciers within the search radius of each volcano:
 ```python
-..\glac_by_volc>python src\glac_by_volc.py -i RGI_IDs -r SEARCH_RADIUS -d DISPLAY
+..\glac_by_volc>python code\glac_by_volc.py -i RGI_IDs -r SEARCH_RADIUS -d DISPLAY
 ```
 3. ***Not needed if the plot scripts below are used:*** Aggregate all regional results to a single `.csv` file for simplified analysis and viewing (this is written in Powershell not Python).
 ```bat
@@ -58,7 +58,7 @@ All three tests give a correlation coefficient/statistic $-1 \leq r \leq 1$, wit
 
 To run the trend analysis simply execute:
 ```python
-..\glac_by_volc>python src\gv_stats.py -r RADIUS1 RADIUS2 ... -x EXOGENOUS -y ENDOGENOUS -n N_MINIMUM -a YEAR1 YEAR2
+..\glac_by_volc>python code\gv_stats.py -r RADIUS1 RADIUS2 ... -x EXOGENOUS -y ENDOGENOUS -n N_MINIMUM -a YEAR1 YEAR2
 ```
 
 The results from the trend analysis are saved in the [results](https://github.com/TryggviU/glac_by_volc/tree/main/results) directory.
@@ -73,7 +73,7 @@ A couple of scripts are included to plot the results.
 
 To plot the global distribution of volcanoes, glaciers, and glaciated volcanoes* run:
 ```python
-..\glac_by_volc>python src\plot_rgi_gvp.py
+..\glac_by_volc>python code\plot_rgi_gvp.py
 ```
 *Note that the figure does not come with a legend or labels for the RGI region polygons.
 
@@ -87,7 +87,7 @@ To plot the global distribution of volcanoes, glaciers, and glaciated volcanoes*
 
 To plot the results from the statistical trend analysis run:
 ```python
-..\glac_by_volc>python src\plot_gv_stats.py -r RADIUS -s STAT -f FIT -p P_VALUE -c COMPUTE
+..\glac_by_volc>python code\plot_gv_stats.py -r RADIUS -s STAT -f FIT -p P_VALUE -c COMPUTE
 ```
 
 ![Trend analysis of the world's glaciated volcanoes showing that 80% of volcanoes have higher median glacier elevations.](/figs/trend_map_dzmed-SR_5.0km_lowres.png "Trend analysis of the world's glaciated volcanoes showing that 80% of volcanoes have higher median glacier elevations.")
@@ -96,7 +96,7 @@ To plot the results from the statistical trend analysis run:
 
 To plot the relative median glacier elevations around volcanoes run:
 ```python
-..\glac_by_volc>python src\plot_gv.py -v GVP_IDs -r RADIUS -e EVERYTHING -n N_MINIMUM -z Z_MAX
+..\glac_by_volc>python code\plot_gv.py -v GVP_IDs -r RADIUS -e EVERYTHING -n N_MINIMUM -z Z_MAX
 ```
 
 ![An example of higher median glacier elevations arround Mount Wrangell in Alaska.](/figs/315020_40.0km-dzmed_lowres.png "An example of higher median glacier elevations arround Mount Wrangell in Alaska.")

@@ -2,9 +2,10 @@
 import os
 # Arguments
 import argparse
+
+import pandas as pd
 # Plotting
 import proplot as pplt
-from cmap import Colormap
 # Geospatial data
 import geopandas as gpd
 import contextily as cx
@@ -49,6 +50,10 @@ parser.add_argument("-n", "--n_min", action="store", nargs="*", type=int, defaul
                     help="The minimum number of glaciers to be used when fitting results.")
 parser.add_argument("-z", "--zmax", action="store", type=int, default=500,
                     help="Select the maximum relative median elevation showed on graphs.")
+parser.add_argument("-b", "--bbox", action="store", nargs="*", type=float, default=[],
+                    help="Select bounding box(es) to plot as [W, S, E, N]")
+parser.add_argument("-p", "--points", action="store", nargs="*", type=float, default=[],
+                    help="Select point(s) to plot as [x0, y0, x1, y1, ...]")
 # Read arguments from the command line
 args = parser.parse_args()
 
@@ -60,6 +65,16 @@ if args.everything:
             filename="GVP_Volcano_List_Holocene.csv"
         )[0]
     )["Volcano Number"].values
+
+if (len(args.bbox) % 4) != 0:
+    raise ValueError("Invalid bounding box values. Must be of the form: W, S, E, N, ...")
+else:
+    args.bbox = [args.bbox[i*4:i*4+4] for i in range(int(len(args.bbox)/4))]
+
+if (len(args.points) % 2) != 0:
+    raise ValueError("Invalid points. Must be given as x0, y0, x1, y1, ...")
+else:
+    args.points = [args.points[i*2:i*2+2] for i in range(int(len(args.points)/2))]
 
 
 def gvp_regional(GVP_id, gdf):
@@ -147,7 +162,7 @@ def in_n_out_glaciers(GVP_id, radius, padding=0.2):
     return gdf, rgi
 
 
-def plot_volc_dzmed(GVP_id, radius, cmap=Colormap('colorbrewer:RdYlBu_r').to_mpl(), vmin=-args.zmax, vmax=args.zmax):
+def plot_volc_dzmed(GVP_id, radius, cmap='RdYlBu_r', vmin=-args.zmax, vmax=args.zmax, bbox=None, points=None):
     """
     A function that plots the relative median elevation of glaciers surrounding volcanoes.
 
@@ -156,8 +171,15 @@ def plot_volc_dzmed(GVP_id, radius, cmap=Colormap('colorbrewer:RdYlBu_r').to_mpl
     :param cmap: colormap to be used.
     :param vmin: minimum dzmed value
     :param vmax: maximum dzmed value
+    :param bbox: Plot boxes
+    :param points:
     :return:
     """
+
+    if points is None:
+        points = []
+    if bbox is None:
+        bbox = []
 
     # Read in the glaciers around the volcano.
     gdf, rgi = in_n_out_glaciers(GVP_id=GVP_id, radius=radius, padding=0.2)
@@ -192,7 +214,7 @@ def plot_volc_dzmed(GVP_id, radius, cmap=Colormap('colorbrewer:RdYlBu_r').to_mpl
         a = 2
 
     fig, ax = pplt.subplots(nrows=1, ncols=1, tight=True, figsize=(a*9, 9))
-    ax.format(labelsize=20, ticklabelsize=12, xformatter="deglon", yformatter="deglat",
+    ax.format(labelsize=20, ticklabelsize=20, xformatter="deglon", yformatter="deglat", xlocator=0.5, ylocator=0.2,
               xlim=[xmin, xmax], ylim=[ymin, ymax])
 
     # Plot the glaciers
@@ -201,10 +223,27 @@ def plot_volc_dzmed(GVP_id, radius, cmap=Colormap('colorbrewer:RdYlBu_r').to_mpl
         rgi.plot(ax=ax, facecolor="none", edgecolor="dimgrey")  # Plot outer glaciers
 
     # Add all the volcanoes on top.
-    gvp[gvp["Volcano Number"] == GVP_id].plot(ax=ax, facecolor="k", edgecolor="black", marker="*", markersize=300)
+    gvp[gvp["Volcano Number"] == GVP_id].plot(ax=ax, facecolor="k", edgecolor="black", marker="*", markersize=400)
     if len(gvp) > 1:
-        gvp[gvp["Volcano Number"] != GVP_id].plot(ax=ax, facecolor="k", edgecolor="none", marker="^", markersize=100)
+        gvp[gvp["Volcano Number"] != GVP_id].plot(ax=ax, facecolor="k", edgecolor="none", marker="^", markersize=200)
         gvp = gvp[gvp["Volcano Number"] == GVP_id]
+
+    # Plot the bounding boxes, if any.
+    if len(bbox) != 0:
+        for b in bbox:
+            box = geo_proc.create_box(minx=b[0], miny=b[1], maxx=b[2], maxy=b[3], crs="EPSG:4326")
+            box.plot(ax=ax, facecolor="none", edgecolor="k", linestyle="--", linewidth=2)
+    # Plot the points, if any.
+    if len(points) != 0:
+        points = pd.DataFrame({"longitude": [p[0] for p in points], "latitude": [p[1] for p in points]})
+        points = gpd.GeoDataFrame(
+            points,
+            geometry=gpd.points_from_xy(points.longitude, points.latitude, crs="EPSG:4326")
+        )
+        points.plot(ax=ax, facecolor="k", edgecolor="black", marker="P", markersize=200)
+        for index, point in points.iterrows():
+            ax.annotate(text=f"{1+index}", xy=[point.longitude + 3 / 100 * (xmax - xmin), point.latitude], ha="center",
+                        fontsize=20, fontweight="bold")
 
     # save the aspect of the figure for later.
     aspect = ax.get_aspect()
@@ -215,20 +254,32 @@ def plot_volc_dzmed(GVP_id, radius, cmap=Colormap('colorbrewer:RdYlBu_r').to_mpl
     # Reset the aspect to the original.
     ax.set_aspect(aspect)
 
+    def intermediate_figure(cmap, vmin, vmax, levels):
+        # An intermediary figure to get the colormap for the matplotlib figure.
+        fig_i, ax_i = pplt.subplots(ncols=1, nrows=1)
+        m = ax_i.pcolormesh(
+            [[0, 0], [1, 1]], [[0, 1], [0, 1]], [[vmin, vmin], [vmin, vmax]],
+            cmap=cmap, vmin=vmin, vmax=vmax, extend='both', levels=levels
+        )
+        pplt.close(fig_i)
+
+        return m
+
     # Add the colorbar.
     ax.colorbar(
-        tkn.intermediate_figure(cmap=cmap, vmin=vmin, vmax=vmax, levels=255),
+        intermediate_figure(cmap=cmap, vmin=vmin, vmax=vmax, levels=255),
         label=r"Relative median glacier elevation [m]",
         ticks=(vmax - vmin) / 4,
         loc="r",
         length=0.7,
-        ticklabelsize=16,
-        labelsize=20
+        ticklabelsize=20,
+        labelsize=20,
+        pad=-0.1
     )
 
     # Add scale bar.
     ax.add_artist(ScaleBar(
-        geo_proc.set_scalebar(N=gvp.geometry.y, E=gvp.geometry.x), font_properties={"size": "xx-large"}, box_alpha=0
+        geo_proc.set_scalebar(N=gvp.geometry.y, E=gvp.geometry.x), font_properties={"size": 20}, box_alpha=0
     ))
 
     fig.savefig(os.path.join(dir_figs, f"{GVP_id}_{float(radius)}km-dzmed.png"))
@@ -250,7 +301,7 @@ def main():
                 continue
 
             print(f"{GVP_id}: {float(radius)} km")
-            plot_volc_dzmed(GVP_id=GVP_id, radius=radius)
+            plot_volc_dzmed(GVP_id=GVP_id, radius=radius, bbox=args.bbox, points=args.points)
 
 
 if __name__ == "__main__":

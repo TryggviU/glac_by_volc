@@ -1,5 +1,5 @@
 import geopandas as gpd
-from shapely.geometry import Point, Polygon
+from shapely.geometry import Point, Polygon, box
 import numpy as np
 import rasterio
 
@@ -47,6 +47,19 @@ def bounding_box(gdf, padding=0):
 
     # Return the bounding box.
     return bbox.envelope
+
+
+def create_box(minx, miny, maxx, maxy, crs):
+    """
+    Create a GeoDataFrame of a square/box in a given CRS.
+    :param minx:
+    :param miny:
+    :param maxx:
+    :param maxy:
+    :param crs:
+    :return: A box GeoDataFrame
+    """
+    return gpd.GeoDataFrame([1], geometry=[box(minx=minx, miny=miny, maxx=maxx, maxy=maxy)], crs=crs)
 
 
 def fix_antimeridian_pass(gdf, ref_point):

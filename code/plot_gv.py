@@ -230,9 +230,12 @@ def plot_volc_dzmed(GVP_id, radius, cmap='RdYlBu_r', vmin=-args.zmax, vmax=args.
 
     # Plot the bounding boxes, if any.
     if len(bbox) != 0:
-        for b in bbox:
+        for index, b in enumerate(bbox):
             box = geo_proc.create_box(minx=b[0], miny=b[1], maxx=b[2], maxy=b[3], crs="EPSG:4326")
             box.plot(ax=ax, facecolor="none", edgecolor="k", linestyle="--", linewidth=2)
+            ax.annotate(text=f"{1 + index}", xy=[b[0] + 3 / 100 * (xmax - xmin), b[3]],
+                        ha="right", va="bottom",
+                        fontsize=20, fontweight="bold")
     # Plot the points, if any.
     if len(points) != 0:
         points = pd.DataFrame({"longitude": [p[0] for p in points], "latitude": [p[1] for p in points]})
@@ -295,9 +298,6 @@ def main():
                     filename=f"{GVP_id}_{float(radius)}km-glaciers.shp"
                 )
             except FileNotFoundError:
-                continue
-
-            if os.path.exists(os.path.join(dir_figs, f"{GVP_id}_{float(radius)}km-dzmed.png")):
                 continue
 
             print(f"{GVP_id}: {float(radius)} km")

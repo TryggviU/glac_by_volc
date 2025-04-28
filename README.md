@@ -75,7 +75,6 @@ To plot the global distribution of volcanoes, glaciers, and glaciated volcanoes*
 ```python
 ..\glac_by_volc>python code\plot_rgi_gvp.py
 ```
-*Note that the figure does not come with a legend or labels for the RGI region polygons.
 
 ![The world's glaciers, volcanoes, and glaciated volcanoes](/figs/rgi_gvp_lowres.png "The world's glaciers, volcanoes, and glaciated volcanoes.")
 

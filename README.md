@@ -76,7 +76,7 @@ To plot the global distribution of volcanoes, glaciers, and glaciated volcanoes*
 ..\glac_by_volc>python code\plot_rgi_gvp.py
 ```
 
-![The world's glaciers, volcanoes, and glaciated volcanoes](/figs/rgi_gvp_lowres.png "The world's glaciers, volcanoes, and glaciated volcanoes.")
+![The world's glaciers, volcanoes, and glaciated volcanoes](/figs/rgi_gvp_lowres.png? "The world's glaciers, volcanoes, and glaciated volcanoes.")
 
 **Legend:** `(Blue poligons) Glaciers (red dots) Holocene volcanoes - (Triangles) Glaciated volcanoes (red) 5 km (dark orange) 10 km (light orange) 20 km (yellow) 40 km.`
 

@@ -19,7 +19,7 @@ import tkn.tkn as tkn
 import stats.fit as sfit
 
 pplt.rc.update({'mathtext.fontset': 'stixsans', 'mathtext.default': 'it',
-                'legend.fontsize': 'xx-large', 'legend.title_fontsize': 'xx-large',
+                'legend.fontsize': 'x-large', 'legend.title_fontsize': 'x-large',
                 'title.size': 20})
 
 # Set the root directory as the project directory.
@@ -208,8 +208,8 @@ def plot_world_trends(stat, radius, fit, p):
               xminorlocator=5, yminorlocator=5,
               xformatter="deglon", yformatter="deglat")
 
-    gvp[gvp[f"{fit}_r"] > 0].plot(ax=ax, facecolor="tab:blue", edgecolor="black", alpha=0.5, markersize=20)
-    gvp[gvp[f"{fit}_r"] < 0].plot(ax=ax, facecolor="tab:red", edgecolor="black", alpha=0.5, markersize=20)
+    gvp[gvp[f"{fit}_r"] > 0].plot(ax=ax, facecolor="tab:blue", edgecolor="k", linewidth=0.5, markersize=20)#, alpha=0.5
+    gvp[gvp[f"{fit}_r"] < 0].plot(ax=ax, facecolor="tab:red", edgecolor="k", linewidth=0.5, markersize=20)#, alpha=0.5
 
     hs = tkn.intermediate_scatterplot(
         info_dict={
@@ -231,7 +231,7 @@ def plot_world_trends(stat, radius, fit, p):
 
 def raincloudplot(df, x, y, figname, **kwargs):
     fig, ax = pplt.subplots(nrows=1, ncols=1, figsize=(12, 6.75), tight=True)
-    ax.format(labelsize=20, yminorlocator="null", linewidth=1, tickwidth=1, ticklabelsize=16,
+    ax.format(labelsize=20, yminorlocator="null", linewidth=1, tickwidth=1, ticklabelsize=20,
               **kwargs)
 
     # sns.violinplot(
@@ -358,26 +358,35 @@ def plot_dz_scatter(compute=True):
 
 
 def plot_dz_scatter_single(radius, compute=True):
-    pplt.rc.update({'legend.fontsize': 'large', 'legend.title_fontsize': 'large'})
+    pplt.rc.update({'legend.fontsize': 'x-large', 'legend.title_fontsize': 'x-large'})
 
     fig, ax = pplt.subplots(figsize=(8, 4.5), tight=True)
-    ax.format(xlabel="Distance from volcanoes [km]", ylabel="Relative glacier elevations [m]", labelsize=20,
-              linewidth=1, tickwidth=1, ticklabelsize=16)
+    ax.format(xlabel="Distance from volcanoes [km]", ylabel="Relative glacier elevations [m]", labelsize=16,
+              linewidth=1, tickwidth=1, ticklabelsize=16, ylim=(-1000, 1000))
     if radius > 10:
-        ax.format(xlocator=5, xminorlocator=1, ylocator=1000, yminorlocator=100)
+        ax.format(xlocator=5, xminorlocator=1, ylocator=500, yminorlocator=100)
     else:
-        ax.format(xlocator=1, xminorlocator=1, ylocator=1000, yminorlocator=100)
-
-    colors = ["black", "black", "black"]
-    linestyles = ["dotted", "--", "-"]
+        ax.format(xlocator=1, xminorlocator=1, ylocator=500, yminorlocator=100)
 
     rgi_rad = gv_glaciers(radius=radius, compute=compute)
     rgi_rad["distance"] *= 1e-3
 
     sns.scatterplot(
         ax=ax, data=rgi_rad, x="distance", y="dzmed", marker=".",
-        color="tab:blue", alpha=0.3,
+        color="tab:grey", edgecolor="none", alpha=0.2,
     )
+
+    colors = ["k", "k", "k"]
+    linestyles = [(0, (1, 1)), "--", "-"]
+
+    for j, dz in enumerate(["dzmin", "dzmax", "dzmed"]):
+        df = tools.df_moving_average(data=rgi_rad, x="distance", y=dz, xmin=0, xmax=radius, dx=0.1)
+        for k in range(1):
+            df[dz] = df[dz].rolling(4, min_periods=1).mean()
+
+        sns.lineplot(
+            ax=ax, data=df, x="distance", y=dz, color=colors[j], linestyle=linestyles[j], linewidth=2, legend=False
+        )
 
     # Compute the linear trend within 5 km of volcanoes.
     trend5 = sfit.SimpleLinearRegression(df=rgi_rad[rgi_rad["distance"] <= 5], col_x="distance", col_y="dzmed")
@@ -385,7 +394,7 @@ def plot_dz_scatter_single(radius, compute=True):
 
     # Plot the trend within 5 km of volcanoes and add a legend with the trend.
     sns.lineplot(ax=ax, x=[0, 5], y=[trend5.intercept, trend5.intercept + 5 * trend5.slope],
-                 color="red", linewidth=2, legend=False)
+                 color="red", linewidth=2, legend=False, alpha=0.7)
 
     # Compute the linear trend outside 5 km of volcanoes.
     if radius > 5:
@@ -393,7 +402,7 @@ def plot_dz_scatter_single(radius, compute=True):
 
         # Plot the trend outside 5 km of volcanoes and add a legend with the trend.
         sns.lineplot(ax=ax, x=[5, radius], y=[trend.intercept + 5 * trend.slope, trend.intercept + radius * trend.slope],
-                     color="red", linestyle="--", linewidth=2, legend=False)
+                     color="red", linestyle="--", linewidth=2, legend=False, alpha=0.7)
 
         ax.legend(
             tkn.intermediate_lineplot(
@@ -414,22 +423,13 @@ def plot_dz_scatter_single(radius, compute=True):
             loc="lower left"
         )
 
-    for j, dz in enumerate(["dzmin", "dzmax", "dzmed"]):
-        df = tools.df_moving_average(data=rgi_rad, x="distance", y=dz, xmin=0, xmax=radius, dx=0.1)
-        for k in range(1):
-            df[dz] = df[dz].rolling(4, min_periods=1).mean()
-
-        sns.lineplot(
-            ax=ax, data=df, x="distance", y=dz, color=colors[j], linestyle=linestyles[j], legend=False
-        )
-
     ax.format(xlim=[0, radius])
 
     ax.legend(
         tkn.intermediate_lineplot(
             colors=colors,
             labels=["Maximum", "Median", "Minimum"],
-            linestyles=["--", "-", "dotted"]
+            linestyles=["--", "-", (0, (1, 1))]
         ),
         label="Moving average",
         ncols=1, loc="upper right", fontsize="xx-large"

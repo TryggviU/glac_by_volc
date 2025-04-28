@@ -6,7 +6,7 @@ data_processed/regional_files*
 data_processed/global_files*
 data_processed/temp*
 figs/glacvolc_stats/
-figs/rgi_gvp.png
+figs/rgi_gvp*
 
 # Ignore all logs
 *.log

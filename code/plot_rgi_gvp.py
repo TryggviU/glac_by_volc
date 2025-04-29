@@ -46,7 +46,9 @@ crs = "EPSG:4326"
 df = pd.DataFrame(
     data={
         "xlim": [(-180, -115), (155, 165), (-25, -13), (-84, -64)],
-        "ylim": [(35, 65), (50, 59.5), (63, 67), (-57, 10)],
+        "ylim": [(35, 65), (50, 60), (63, 67), (-57, 10)],
+        "xlocator": [10, 5, 5, 10],
+        "ylocator": [10, 5, 2, 10],
         "rgi": [
             ["01_alaska", "02_western_canada_usa"],
             ["10_north_asia"],
@@ -224,14 +226,17 @@ pplt.close(fig)
 ##################################
 # --- The zoomed-in subplots --- #
 ##################################
+pplt.rc.update({'legend.fontsize': 12, 'legend.title_fontsize': 12, 'title.size': 12})
 
 fig, axs = pplt.subplots(
-    [[1, 1, 1, 4], [1, 1, 1, 4], [2, 3, 3, 4]], refnum=4, figsize=(9, 6.5), tight=True, share=False, span=False
+    [[1, 1, 1, 4], [1, 1, 1, 4], [2, 3, 3, 4]], refnum=4, figsize=(10, 8), tight=True, share=False, span=False
 )
-axs.format(abc=True, abcloc='ul', abcbbox=False, abcsize=16, xticks=[], yticks=[])
+axs.format(abc=True, abcloc='ul', abcbbox=False, abcsize=16, xminorlocator=1, yminorlocator=1, ticklabelsize=12,
+           xformatter="deglon", yformatter="deglat", grid=False)#, xticks=[], yticks=[])
 
 for i, ax in enumerate(axs):
-    ax.format(xlim=sgdf.iloc[i].xlim, ylim=sgdf.iloc[i].ylim)
+    ax.format(xlim=sgdf.iloc[i].xlim, ylim=sgdf.iloc[i].ylim,
+              xlocator=sgdf.loc[i, "xlocator"], ylocator=sgdf.loc[i, "ylocator"])
 
     for RGI_id in sgdf.loc[i, "rgi"]:
         rgi_regional = gpd.read_file(
@@ -257,5 +262,37 @@ for i, ax in enumerate(axs):
     cx.add_basemap(ax=ax, zoom=8, source=cx.providers.Esri.WorldPhysical, crs=crs, attribution=False) # max zoom 8
     ax.set_aspect(aspect)
 
-fig.savefig(os.path.join(dir_root, "figs", f"rgi_gvp_zoom.png"))
+fig.legend(
+    tkn.intermediate_scatterplot(
+        info_dict={
+            "facecolors": pplt.Colormap("autumn")([0, 0.33, 0.66, 1]).tolist(),
+            "edgecolors": ["k", "k", "k", "k"],
+            "markers": ["^", "^", "^", "^"],
+            "labels": ["5 km", "10 km", "20 km", "40 km"],
+        }
+    ),
+    loc="b",
+    ncol=4,
+    markersize=100,
+    title="Glacierised volcanoes",
+    pad=0,
+    frame=False
+)
+
+axs[0].legend(
+    tkn.intermediate_scatterplot(
+        info_dict={
+            "facecolors": ["red", "midnightblue"],
+            "edgecolors": ["none", "none"],
+            "markers": ["o", "o"],
+            "labels": ["Holocene volcanoes", "Glaciers"],
+        }
+    ),
+    loc="ll",
+    ncol=1,
+    markersize=100,
+    edgecolor="none"
+)
+
+fig.savefig(os.path.join(dir_root, "figs", f"rgi_gvp_zoom1.png"))
 pplt.close(fig)

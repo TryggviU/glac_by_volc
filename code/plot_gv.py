@@ -285,7 +285,7 @@ def plot_volc_dzmed(GVP_id, radius, cmap='RdYlBu_r', vmin=-args.zmax, vmax=args.
         geo_proc.set_scalebar(N=gvp.geometry.y, E=gvp.geometry.x), font_properties={"size": 20}, box_alpha=0
     ))
 
-    fig.savefig(os.path.join(dir_figs, f"{GVP_id}_{float(radius)}km-dzmed.png"))
+    fig.savefig(os.path.join(dir_figs, f"{GVP_id}_{float(radius)}km-dzmed.pdf"), dpi=300)
     pplt.close(fig)
 
 

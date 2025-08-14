@@ -154,7 +154,8 @@ gv.iloc[::-1].plot(ax=ax, column="radius", legend=False, categorical=True, cmap=
                    legend_kwds={"labels": ["  5km", "10km", "20km", "40km"], "loc": "lower center", "ncol": 4})
 
 # Add a background basemap.
-cx.add_basemap(ax=ax, zoom=4, source=cx.providers.Esri.WorldPhysical, crs=crs, attribution=False)
+# cx.add_basemap(ax=ax, zoom=4, source=cx.providers.Esri.WorldPhysical, crs=crs, attribution=False)
+cx.add_basemap(ax=ax, source=os.path.join(dir_data, "map", "NE1_HR_LC_SR_W_DR", "NE1_HR_LC_SR_W_DR.tif"))
 
 rgi_txt = [
     [-138, 51],  # 01
@@ -220,7 +221,8 @@ ax.legend(
     edgecolor="none"
 )
 
-fig.savefig(os.path.join(dir_root, "figs", "rgi_gvp.png"))
+fig.savefig(os.path.join(dir_root, "figs", "rgi_gvp.pdf"), dpi=300)
+fig.savefig(os.path.join(dir_root, "figs", "rgi_gvp.png"), dpi=300)
 pplt.close(fig)
 
 ##################################
@@ -259,7 +261,8 @@ for i, ax in enumerate(axs):
 
     # Add a basemap, but keep the aspect ratio.
     aspect = ax.get_aspect()
-    cx.add_basemap(ax=ax, zoom=8, source=cx.providers.Esri.WorldPhysical, crs=crs, attribution=False) # max zoom 8
+    # cx.add_basemap(ax=ax, zoom=8, source=cx.providers.Esri.WorldPhysical, crs=crs, attribution=False) # max zoom 8
+    cx.add_basemap(ax=ax, source=os.path.join(dir_data, "map", "NE1_HR_LC_SR_W_DR", "NE1_HR_LC_SR_W_DR.tif"))
     ax.set_aspect(aspect)
 
 fig.legend(
@@ -294,5 +297,6 @@ axs[0].legend(
     edgecolor="none"
 )
 
-fig.savefig(os.path.join(dir_root, "figs", f"rgi_gvp_zoom1.png"))
+fig.savefig(os.path.join(dir_root, "figs", f"rgi_gvp_zoom.pdf"), dpi=300)
+fig.savefig(os.path.join(dir_root, "figs", f"rgi_gvp_zoom.png"), dpi=300)
 pplt.close(fig)

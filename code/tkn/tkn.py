@@ -68,12 +68,12 @@ def intermediate_lineplot(colors, labels, linestyles=None):
     return hs
 
 
-def intermediate_figure(cmap, vmin, vmax, levels):
+def intermediate_figure(cmap, vmin, vmax, levels, extend='neither'):
     # An intermediary figure to get the colormap for the matplotlib figure.
     fig_i, ax_i = plt.subplots(ncols=1, nrows=1)
     m = ax_i.pcolormesh(
         [[0, 0], [1, 1]], [[0, 1], [0, 1]], [[vmin, vmin], [vmin, vmax]],
-        cmap=cmap, vmin=vmin, vmax=vmax, levels=levels
+        cmap=cmap, vmin=vmin, vmax=vmax, levels=levels, extend=extend
     )
     plt.close(fig_i)
 

@@ -2,8 +2,11 @@
 
 Repository for code used to locate glaciers within a radial distance from volcanoes, and perform analysis on the geometries and dynamics of those glaciers.
 
-[![DOI](https://zenodo.org/badge/830212082.svg)](https://doi.org/10.5281/zenodo.16418629)
+Please cite the following if using the code:
 
+[![DOI:10.1038/s41467-025-63332-2](http://img.shields.io/badge/DOI-10.1038/s41467--025--63332--2-blue.svg)](https://doi.org/10.1038/s41467-025-63332-2) - Unnsteinsson, T., _et al_. Volcanoes stunt nearby glaciers. _Nature Communications_ **16**, 8099 (2025).
+
+[![DOI](https://zenodo.org/badge/830212082.svg)](https://doi.org/10.5281/zenodo.16418629) - The Zenodo repository of the code used in the above article.
 
 
 ## Data
